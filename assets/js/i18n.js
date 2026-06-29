@@ -17,7 +17,7 @@ const I18N = {
 
     "home.hero.title.a": "Cose fatte",
     "home.hero.title.b": "a mano",
-    "home.hero.tag": "Uncinetto, cucito e qualche pezzo da collezione. Pochi oggetti per volta, ognuno diverso dall'altro.",
+    "home.hero.tag": "Uncinetto, cucito e qualche pezzo in resina. Pochi oggetti per volta, unici, fatti con cura e passione.",
     "home.hero.cta": "Guarda il catalogo",
     "home.hero.about": "Chi siamo",
 
@@ -68,9 +68,9 @@ const I18N = {
     "404.home": "Torna alla home",
 
     "about.title": "Chi siamo",
-    "about.p1": "Siamo una coppia. Gaia crea con uncinetto e ago: amigurumi, accessori, piccoli oggetti per la casa. Io mi occupo della parte tecnica e di una piccola sezione di pezzi da collezione.",
-    "about.p2": "gaiacrochet nasce per dare uno spazio ai lavori di Gaia: pochi pezzi per volta, fatti con calma, ognuno diverso dall'altro. Niente produzione in serie.",
-    "about.p3": "Il sito è una vetrina: qui vedi i prodotti, poi ci scrivi via email o su Instagram e ci accordiamo. Semplice così.",
+    "about.p1": "Siamo solo noi due, e lo facciamo per passione: per avere un posto tutto nostro, una vetrina dove mostrarvi le cose che ci piace creare.",
+    "about.p2": "gaiacrochet è proprio questo: uncinetto, ago e qualche pezzo in resina — amigurumi, accessori, piccoli oggetti per la casa. Pochi pezzi per volta, fatti con calma, ognuno diverso dall'altro. Niente produzione in serie.",
+    "about.p3": "Il sito è una vetrina: qui vedi i prodotti, poi ci scrivi via email o su Instagram e ci accordiamo. Semplice così — e un po' della nostra passione arriva anche da te.",
 
     "shipping.title": "Spedizioni e pagamenti",
     "shipping.h_ship": "Spedizioni",
@@ -108,7 +108,7 @@ const I18N = {
 
     "home.hero.title.a": "Things made",
     "home.hero.title.b": "by hand",
-    "home.hero.tag": "Crochet, sewing and a few collectible pieces. A handful of items at a time, each one different.",
+    "home.hero.tag": "Crochet, sewing and a few resin pieces. A handful at a time, each one unique, made with care and passion.",
     "home.hero.cta": "See the catalogue",
     "home.hero.about": "About us",
 
@@ -159,9 +159,9 @@ const I18N = {
     "404.home": "Back to home",
 
     "about.title": "About us",
-    "about.p1": "We're a couple. Gaia creates with crochet and needle: amigurumi, accessories, small things for the home. I take care of the technical side and a small section of collectible pieces.",
-    "about.p2": "gaiacrochet exists to give Gaia's work a space: a few pieces at a time, made calmly, each one different. No mass production.",
-    "about.p3": "The site is a showcase: here you see the products, then you write to us by email or on Instagram and we sort it out. Simple as that.",
+    "about.p1": "It's just the two of us, and we do this out of passion: to have a place of our own, a showcase where we can show you the things we love making.",
+    "about.p2": "That's exactly what gaiacrochet is: crochet, needlework and a few resin pieces — amigurumi, accessories, small things for the home. A few pieces at a time, made calmly, each one different. No mass production.",
+    "about.p3": "The site is a showcase: here you see the products, then you write to us by email or on Instagram and we sort it out. Simple as that — and a little of our passion reaches you too.",
 
     "shipping.title": "Shipping & payment",
     "shipping.h_ship": "Shipping",
