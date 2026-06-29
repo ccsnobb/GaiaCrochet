@@ -1,0 +1,13 @@
+{
+  "name": "gaiacrochet-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sito vetrina statico di gaiacrochet.com",
+  "type": "module",
+  "scripts": {
+    "optimize": "node tools/optimize-images.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.0"
+  }
+}

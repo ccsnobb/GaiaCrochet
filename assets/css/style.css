@@ -1,0 +1,349 @@
+/* ============================================================
+   gaiacrochet.com — foglio di stile v1
+   Font self-hosted (sito cookieless, nessuna chiamata esterna).
+   ============================================================ */
+
+/* ---------- Font ---------- */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("../fonts/bricolage-var.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-var.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("../fonts/opendyslexic-regular.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url("../fonts/opendyslexic-bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* ---------- Token ---------- */
+:root {
+  /* palette ispirata ai filati: granata, petrolio, senape, carta calda */
+  --paper:      #F2EADB;
+  --paper-2:    #FBF6EC;
+  --ink:        #2B2019;
+  --ink-soft:   #6B5D52;
+  --garnet:     #9E2540;
+  --garnet-deep:#7A1B30;
+  --teal:       #1E5B57;
+  --mustard:    #C98A1E;
+  --line:       rgba(43, 32, 25, 0.16);
+
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body:    "Inter", system-ui, sans-serif;
+
+  --scale: 1;            /* moltiplicatore testo, alzato in modalità "testo grande" */
+  --maxw: 1140px;
+  --radius: 14px;
+  --t: 180ms ease;       /* durata transizioni */
+}
+
+/* Modalità accessibilità (classi su <html>) */
+html.a11y-dys body { font-family: "OpenDyslexic", sans-serif; }
+html.a11y-dys h1, html.a11y-dys h2, html.a11y-dys h3,
+html.a11y-dys .logo__word { font-family: "OpenDyslexic", sans-serif; letter-spacing: 0; }
+html.a11y-large { --scale: 1.28; }
+html.a11y-reduce *,
+html.a11y-reduce *::before,
+html.a11y-reduce *::after { transition: none !important; animation: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ---------- Reset di base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: calc(17px * var(--scale));
+  line-height: 1.6;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--garnet-deep); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+button { font: inherit; cursor: pointer; }
+
+/* Focus sempre visibile e marcato */
+:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Salto rapido al contenuto (screen reader / tastiera) */
+.skip-link {
+  position: absolute; left: 12px; top: -60px;
+  background: var(--ink); color: var(--paper);
+  padding: 10px 16px; border-radius: 8px; z-index: 100;
+  transition: top var(--t);
+}
+.skip-link:focus { top: 12px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Cucitura (elemento firma) ---------- */
+.stitch {
+  height: 3px; border: 0; margin: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--garnet) 0 11px,
+    transparent 11px 20px
+  );
+}
+.stitch--teal {
+  background: repeating-linear-gradient(
+    90deg, var(--teal) 0 11px, transparent 11px 20px);
+}
+
+/* ---------- Layout ---------- */
+.wrap { width: min(100% - 40px, var(--maxw)); margin-inline: auto; }
+.stack > * + * { margin-top: 1rem; }
+
+/* ---------- Tipografia ---------- */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.4em;
+}
+h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); }
+h3 { font-size: 1.25rem; }
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 0.6rem;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header__bar {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding: 0.7rem 0;
+}
+.logo { display: inline-flex; align-items: center; gap: 0.55rem; text-decoration: none; color: var(--ink); }
+.logo__mark { width: 30px; height: 30px; flex: none; }
+.logo__word { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; letter-spacing: -0.02em; }
+.logo__word b { color: var(--garnet); font-weight: 700; }
+
+.nav { display: flex; align-items: center; gap: 0.3rem; margin-left: auto; flex-wrap: wrap; }
+.nav a {
+  color: var(--ink); text-decoration: none; font-weight: 500;
+  padding: 0.45rem 0.7rem; border-radius: 9px; transition: background var(--t);
+}
+.nav a:hover { background: color-mix(in srgb, var(--mustard) 22%, transparent); }
+.nav a[aria-current="page"] { color: var(--garnet-deep); box-shadow: inset 0 -2px 0 var(--garnet); }
+
+.tool-btn {
+  background: transparent; border: 1px solid var(--line);
+  border-radius: 9px; padding: 0.4rem 0.7rem; color: var(--ink);
+  display: inline-flex; align-items: center; gap: 0.4rem; transition: border-color var(--t), background var(--t);
+}
+.tool-btn:hover { border-color: var(--ink); }
+.lang-btn b { font-weight: 700; }
+.lang-btn span { opacity: 0.45; }
+
+/* ---------- Hero (home) ---------- */
+.hero {
+  min-height: 72vh;
+  display: grid; place-content: center; text-align: center;
+  padding: 4rem 0 5rem;
+}
+.hero__inner { max-width: 720px; margin-inline: auto; }
+.hero h1 { margin-bottom: 0.3em; }
+.hero h1 .accent { color: var(--garnet); }
+.hero__tag { font-size: clamp(1.05rem, 2.2vw, 1.4rem); color: var(--ink-soft); margin: 0 auto 2rem; max-width: 38ch; }
+.hero__stitch { width: 220px; margin: 1.6rem auto 0; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--garnet); color: #fff; text-decoration: none;
+  font-weight: 600; padding: 0.85rem 1.6rem; border-radius: 999px;
+  border: 0; transition: transform var(--t), background var(--t);
+}
+.btn:hover { background: var(--garnet-deep); transform: translateY(-1px); }
+.btn--ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* ---------- Sezioni generiche / pagine testo ---------- */
+.section { padding: 3.5rem 0; }
+.prose { max-width: 64ch; }
+.prose p { margin: 0 0 1.1rem; }
+.prose h2 { margin-top: 2.2rem; }
+.lead { font-size: 1.2rem; color: var(--ink-soft); }
+
+/* ---------- Catalogo: barra filtri ---------- */
+.catalog-head { padding: 2.5rem 0 1rem; }
+.filters {
+  display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: flex-end;
+  padding: 1rem 0 1.6rem;
+}
+.field { display: flex; flex-direction: column; gap: 0.3rem; }
+.field label { font-size: 0.8rem; font-weight: 600; color: var(--ink-soft); }
+.field input, .field select {
+  font: inherit; padding: 0.6rem 0.8rem; border: 1px solid var(--line);
+  border-radius: 10px; background: var(--paper-2); color: var(--ink); min-width: 180px;
+}
+.field input:focus, .field select:focus { border-color: var(--teal); }
+.field--search { flex: 1 1 240px; }
+.field--search input { width: 100%; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.chip {
+  background: var(--paper-2); border: 1px solid var(--line); color: var(--ink);
+  padding: 0.4rem 0.85rem; border-radius: 999px; font-weight: 500; transition: all var(--t);
+}
+.chip[aria-pressed="true"] { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+.result-count { color: var(--ink-soft); font-size: 0.92rem; padding-bottom: 0.6rem; }
+
+/* ---------- Griglia prodotti ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.6rem;
+  padding-bottom: 4rem;
+}
+.card {
+  background: var(--paper-2); border-radius: var(--radius);
+  border: 1px solid var(--line); overflow: hidden;
+  text-align: left; padding: 0; display: flex; flex-direction: column;
+  transition: transform var(--t), box-shadow var(--t), outline-color var(--t);
+  outline: 2px dashed transparent; outline-offset: 5px;
+}
+.card:hover, .card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px -16px rgba(43,32,25,0.45);
+  outline-color: var(--garnet);   /* la cucitura "ricama" la card al passaggio */
+}
+.card__media { aspect-ratio: 4 / 3; background: #e7ddca; overflow: hidden; }
+.card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 300ms ease; }
+.card:hover .card__media img { transform: scale(1.04); }
+.card__body { padding: 0.9rem 1rem 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
+.card__name { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; line-height: 1.15; }
+.card__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
+
+/* Prezzo: intero grande + centesimi piccoli + € discretissimo */
+.price { font-family: var(--font-display); font-weight: 700; color: var(--ink); display: inline-flex; align-items: baseline; }
+.price__cur { font-size: 0.62em; font-weight: 600; color: var(--ink-soft); margin-right: 1px; }
+.price__int { font-size: 1.5rem; line-height: 1; }
+.price__dec { font-size: 0.7em; font-weight: 600; color: var(--ink-soft); }
+
+/* Badge disponibilità */
+.badge {
+  font-size: 0.74rem; font-weight: 700; letter-spacing: 0.02em;
+  padding: 0.22rem 0.6rem; border-radius: 999px; white-space: nowrap;
+}
+.badge--available { background: color-mix(in srgb, var(--teal) 16%, var(--paper-2)); color: var(--teal); }
+.badge--order     { background: color-mix(in srgb, var(--mustard) 22%, var(--paper-2)); color: #8a5e08; }
+
+.empty {
+  text-align: center; padding: 4rem 1rem; color: var(--ink-soft);
+  border: 2px dashed var(--line); border-radius: var(--radius);
+}
+
+/* ---------- Modale prodotto ---------- */
+dialog.product {
+  border: 0; border-radius: 18px; padding: 0; max-width: 760px; width: min(94vw, 760px);
+  background: var(--paper-2); color: var(--ink); box-shadow: 0 30px 70px -20px rgba(43,32,25,0.6);
+}
+dialog.product::backdrop { background: rgba(43, 32, 25, 0.45); backdrop-filter: blur(3px); }
+.product__grid { display: grid; grid-template-columns: 1fr 1fr; }
+.product__gallery { background: #e7ddca; }
+.product__gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.product__thumbs { display: flex; gap: 0.4rem; padding: 0.5rem; flex-wrap: wrap; }
+.product__thumbs button { border: 2px solid transparent; border-radius: 8px; overflow: hidden; padding: 0; width: 54px; height: 54px; }
+.product__thumbs button[aria-current="true"] { border-color: var(--garnet); }
+.product__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.product__info { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; gap: 0.7rem; }
+.product__close {
+  position: absolute; top: 10px; right: 10px; z-index: 2;
+  width: 38px; height: 38px; border-radius: 50%; border: 0;
+  background: rgba(43,32,25,0.7); color: #fff; font-size: 1.2rem; line-height: 1;
+}
+.product__meta { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.95rem; }
+.product__meta dt { font-weight: 700; color: var(--ink-soft); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.product__meta dd { margin: 0 0 0.4rem; }
+.handmade-note {
+  display: flex; gap: 0.5rem; align-items: flex-start;
+  background: color-mix(in srgb, var(--mustard) 16%, var(--paper-2));
+  border-radius: 10px; padding: 0.6rem 0.8rem; font-size: 0.88rem; color: #6e4d08;
+}
+.product__price-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: auto; }
+
+/* ---------- Footer ---------- */
+.site-footer { border-top: 1px solid var(--line); padding: 2.5rem 0; margin-top: 2rem; color: var(--ink-soft); }
+.site-footer__bar { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; justify-content: space-between; }
+.site-footer a { color: var(--ink-soft); }
+.social { display: inline-flex; gap: 0.6rem; align-items: center; }
+.social a { display: inline-flex; padding: 0.4rem; border-radius: 8px; }
+.social a:hover { background: color-mix(in srgb, var(--mustard) 22%, transparent); }
+
+/* ---------- Pannello accessibilità ---------- */
+.a11y-panel {
+  position: fixed; right: 16px; bottom: 16px; z-index: 60;
+}
+.a11y-toggle {
+  width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--paper-2); color: var(--ink); display: grid; place-content: center;
+  box-shadow: 0 8px 20px -10px rgba(43,32,25,0.5);
+}
+.a11y-menu {
+  position: absolute; right: 0; bottom: 64px; width: 280px;
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: 14px;
+  padding: 1rem; box-shadow: 0 20px 50px -20px rgba(43,32,25,0.6);
+}
+.a11y-menu[hidden] { display: none; }
+.a11y-menu h2 { font-size: 1.05rem; margin-bottom: 0.8rem; }
+.a11y-row { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 0.5rem 0; }
+.a11y-row + .a11y-row { border-top: 1px solid var(--line); }
+.a11y-row span { font-size: 0.95rem; }
+
+/* Switch accessibile */
+.switch { position: relative; width: 46px; height: 26px; flex: none; }
+.switch input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.switch .track { position: absolute; inset: 0; background: var(--line); border-radius: 999px; transition: background var(--t); }
+.switch .track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: #fff; border-radius: 50%; transition: transform var(--t); }
+.switch input:checked + .track { background: var(--teal); }
+.switch input:checked + .track::after { transform: translateX(20px); }
+.switch input:focus-visible + .track { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .product__grid { grid-template-columns: 1fr; }
+  .nav { gap: 0; }
+  .nav a { padding: 0.4rem 0.5rem; font-size: 0.95rem; }
+  .hero { min-height: 60vh; }
+}

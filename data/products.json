@@ -1,0 +1,119 @@
+{
+  "products": [
+    {
+      "id": "amigurumi-volpe",
+      "category": "uncinetto",
+      "handmade": true,
+      "price": 28.0,
+      "availability": "available",
+      "images": [
+        "assets/img/sample-uncinetto-1.svg",
+        "assets/img/sample-uncinetto-2.svg"
+      ],
+      "name_it": "Volpe amigurumi",
+      "name_en": "Amigurumi fox",
+      "desc_it": "Piccola volpe lavorata all'uncinetto, imbottita con ovatta atossica. Alta circa 18 cm.",
+      "desc_en": "Small crocheted fox, stuffed with non-toxic filling. About 18 cm tall.",
+      "material_it": "Cotone, imbottitura atossica, occhi di sicurezza",
+      "material_en": "Cotton, non-toxic stuffing, safety eyes",
+      "time_it": "Pronta per la spedizione",
+      "time_en": "Ready to ship"
+    },
+    {
+      "id": "presina-fiore",
+      "category": "uncinetto",
+      "handmade": true,
+      "price": 12.5,
+      "availability": "order",
+      "images": [
+        "assets/img/sample-uncinetto-2.svg",
+        "assets/img/sample-uncinetto-1.svg"
+      ],
+      "name_it": "Presina a fiore",
+      "name_en": "Flower potholder",
+      "desc_it": "Presina da cucina a forma di fiore, in cotone resistente al calore. Disponibile in più colori su richiesta.",
+      "desc_en": "Flower-shaped kitchen potholder in heat-resistant cotton. Available in several colours on request.",
+      "material_it": "Cotone 100%",
+      "material_en": "100% cotton",
+      "time_it": "Su ordinazione, circa 5-7 giorni",
+      "time_en": "Made to order, about 5-7 days"
+    },
+    {
+      "id": "pochette-lino",
+      "category": "cucito",
+      "handmade": true,
+      "price": 22.0,
+      "availability": "available",
+      "images": [
+        "assets/img/sample-cucito-1.svg",
+        "assets/img/sample-cucito-2.svg"
+      ],
+      "name_it": "Pochette in lino",
+      "name_en": "Linen pouch",
+      "desc_it": "Pochette foderata in lino, con cerniera. Perfetta per trucchi o piccoli oggetti.",
+      "desc_en": "Lined linen pouch with zip. Perfect for make-up or small items.",
+      "material_it": "Lino, fodera in cotone, cerniera in metallo",
+      "material_en": "Linen, cotton lining, metal zip",
+      "time_it": "Pronta per la spedizione",
+      "time_en": "Ready to ship"
+    },
+    {
+      "id": "borsa-tote",
+      "category": "cucito",
+      "handmade": true,
+      "price": 34.0,
+      "availability": "order",
+      "images": [
+        "assets/img/sample-cucito-2.svg",
+        "assets/img/sample-cucito-1.svg"
+      ],
+      "name_it": "Borsa tote",
+      "name_en": "Tote bag",
+      "desc_it": "Borsa capiente in cotone pesante, cuciture rinforzate. Tessuto a scelta tra quelli disponibili.",
+      "desc_en": "Roomy heavy-cotton bag with reinforced seams. Fabric chosen among those available.",
+      "material_it": "Cotone pesante",
+      "material_en": "Heavy cotton",
+      "time_it": "Su ordinazione, circa 7-10 giorni",
+      "time_en": "Made to order, about 7-10 days"
+    },
+    {
+      "id": "set-dadi-galassia",
+      "category": "altro",
+      "subcategory": "dadi-resina",
+      "handmade": true,
+      "price": 30.0,
+      "availability": "order",
+      "images": [
+        "assets/img/sample-dadi-1.svg",
+        "assets/img/sample-dadi-2.svg"
+      ],
+      "name_it": "Set dadi in resina — Galassia",
+      "name_en": "Resin dice set — Galaxy",
+      "desc_it": "Set completo da 7 dadi poliedrici in resina, con glitter e inserti. Ogni set è leggermente diverso.",
+      "desc_en": "Full set of 7 polyhedral resin dice, with glitter and inclusions. Each set is slightly different.",
+      "material_it": "Resina epossidica, glitter",
+      "material_en": "Epoxy resin, glitter",
+      "time_it": "Su ordinazione, circa 10-14 giorni",
+      "time_en": "Made to order, about 10-14 days"
+    },
+    {
+      "id": "videogioco-collezione",
+      "category": "altro",
+      "subcategory": "videogiochi",
+      "handmade": false,
+      "price": 45.0,
+      "availability": "available",
+      "images": [
+        "assets/img/sample-game-1.svg"
+      ],
+      "name_it": "Videogioco da collezione (esempio)",
+      "name_en": "Collectible video game (sample)",
+      "desc_it": "Pezzo da collezione, condizioni nuove. Esemplare unico: una volta venduto, viene rimosso dal catalogo.",
+      "desc_en": "Collectible item, new condition. Single copy: once sold, it is removed from the catalogue.",
+      "material_it": "—",
+      "material_en": "—",
+      "time_it": "Pronto per la spedizione",
+      "time_en": "Ready to ship"
+    }
+  ]
+}

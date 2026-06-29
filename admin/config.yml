@@ -1,0 +1,78 @@
+# ============================================================
+# Configurazione Sveltia CMS (formato compatibile Decap).
+# Modifica i valori segnati con  <-- DA COMPILARE
+# ============================================================
+
+backend:
+  name: github
+  repo: TUO-UTENTE-GITHUB/gaiacrochet   # <-- DA COMPILARE: utente/nome-repo
+  branch: main
+  base_url: https://TUO-WORKER.workers.dev   # <-- DA COMPILARE: URL del Worker OAuth
+
+# Cartella dove il CMS carica le immagini caricate dall'utente
+media_folder: assets/img
+public_folder: assets/img
+
+# Lingua dell'interfaccia del pannello
+locale: it
+
+collections:
+  - name: catalogo
+    label: Catalogo
+    files:
+      - name: prodotti
+        label: Prodotti
+        file: data/products.json
+        format: json
+        description: "Aggiungi, modifica o nascondi i prodotti del catalogo."
+        fields:
+          - name: products
+            label: Prodotti
+            label_singular: Prodotto
+            widget: list
+            summary: "{{fields.name_it}} — {{fields.availability}}"
+            fields:
+              - { name: id, label: Identificativo (univoco, senza spazi), widget: string, hint: "Esempio: amigurumi-volpe" }
+
+              - name: category
+                label: Categoria
+                widget: select
+                options:
+                  - { label: Uncinetto, value: uncinetto }
+                  - { label: Cucito, value: cucito }
+                  - { label: Altro, value: altro }
+
+              - name: subcategory
+                label: Sottocategoria (solo per "Altro")
+                widget: select
+                required: false
+                options:
+                  - { label: Dadi in resina, value: dadi-resina }
+                  - { label: Videogiochi, value: videogiochi }
+
+              - { name: handmade, label: Fatto a mano (mostra l'avviso sulle variazioni), widget: boolean, default: true }
+
+              - { name: price, label: Prezzo (euro), widget: number, value_type: float, min: 0, step: 0.5 }
+
+              - name: availability
+                label: Disponibilità
+                widget: select
+                default: available
+                options:
+                  - { label: Disponibile, value: available }
+                  - { label: Su ordinazione, value: order }
+                  - { label: Nascosto (non mostrato nel catalogo), value: hidden }
+
+              - name: images
+                label: Foto (2-3 consigliate)
+                widget: list
+                field: { name: image, label: Foto, widget: image }
+
+              - { name: name_it, label: "Nome (italiano)", widget: string }
+              - { name: name_en, label: "Nome (inglese)", widget: string }
+              - { name: desc_it, label: "Descrizione (italiano)", widget: text }
+              - { name: desc_en, label: "Descrizione (inglese)", widget: text }
+              - { name: material_it, label: "Materiale (italiano)", widget: string, required: false }
+              - { name: material_en, label: "Materiale (inglese)", widget: string, required: false }
+              - { name: time_it, label: "Tempi (italiano)", widget: string, required: false }
+              - { name: time_en, label: "Tempi (inglese)", widget: string, required: false }

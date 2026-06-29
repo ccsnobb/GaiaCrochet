@@ -1,0 +1,216 @@
+/* ============================================================
+   catalog.js — catalogo prodotti.
+   Sorgente unica: data/products.json (modificabile da Sveltia CMS).
+   Stati: available | order | hidden. "hidden" non viene mostrato.
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  const CONTACT_EMAIL = "info@gaiacrochet.com";
+
+  const grid = document.getElementById("grid");
+  const countEl = document.getElementById("result-count");
+  const searchInput = document.getElementById("f-search");
+  const catSelect = document.getElementById("f-category");
+  const availSelect = document.getElementById("f-availability");
+  if (!grid) return; // non siamo nella pagina catalogo
+
+  let PRODUCTS = [];
+
+  /* ---------- Caricamento dati ---------- */
+  fetch("data/products.json", { cache: "no-cache" })
+    .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    .then((data) => {
+      // Accetta sia un array sia un oggetto { "products": [...] } (formato CMS)
+      const list = Array.isArray(data) ? data : (data && data.products) || [];
+      // Mostra solo i prodotti non nascosti
+      PRODUCTS = list.filter((p) => p && p.availability !== "hidden");
+      render();
+    })
+    .catch(() => {
+      grid.innerHTML =
+        '<div class="empty">' + escapeHtml(t("catalog.loaderror")) + "</div>";
+    });
+
+  /* ---------- Eventi filtri ---------- */
+  [searchInput, catSelect, availSelect].forEach((el) => {
+    if (el) el.addEventListener("input", render);
+  });
+  document.addEventListener("langchange", render);
+
+  /* ---------- Helper ---------- */
+  function field(p, base) { return p[base + "_" + getLang()] || p[base + "_it"] || ""; }
+
+  function formatPrice(value) {
+    const [int, dec] = Number(value).toFixed(2).split(".");
+    return (
+      '<span class="price">' +
+      '<span class="price__cur" aria-hidden="true">€</span>' +
+      '<span class="price__int">' + int + "</span>" +
+      '<span class="price__dec">' + dec + "</span>" +
+      '<span class="sr-only"> euro</span>' +
+      "</span>"
+    );
+  }
+
+  function isHandmade(p) {
+    // flag esplicito, con fallback sulle categorie fatte a mano
+    if (typeof p.handmade === "boolean") return p.handmade;
+    return p.category === "cucito" || p.category === "uncinetto";
+  }
+
+  function mailtoFor(p) {
+    const name = field(p, "name");
+    const subject = t("mail.subject", { name });
+    const body = t("mail.body", { name });
+    return (
+      "mailto:" + CONTACT_EMAIL +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body)
+    );
+  }
+
+  function matchesFilters(p) {
+    const cat = catSelect ? catSelect.value : "";
+    const avail = availSelect ? availSelect.value : "";
+    const q = searchInput ? searchInput.value.trim().toLowerCase() : "";
+
+    if (cat && p.category !== cat) return false;
+    if (avail && p.availability !== avail) return false;
+    if (q) {
+      const hay = [
+        p.name_it, p.name_en, p.desc_it, p.desc_en, p.material_it, p.material_en
+      ].filter(Boolean).join(" ").toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  }
+
+  /* ---------- Rendering ---------- */
+  function render() {
+    const list = PRODUCTS.filter(matchesFilters);
+
+    countEl.textContent =
+      list.length === 1 ? t("catalog.count.one") : t("catalog.count.many", { n: list.length });
+
+    if (list.length === 0) {
+      grid.innerHTML = '<div class="empty">' + escapeHtml(t("catalog.empty")) + "</div>";
+      return;
+    }
+
+    grid.innerHTML = "";
+    list.forEach((p) => grid.appendChild(buildCard(p)));
+  }
+
+  function buildCard(p) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "card";
+    card.setAttribute("aria-haspopup", "dialog");
+
+    const img = (p.images && p.images[0]) || "assets/img/placeholder.svg";
+    const name = field(p, "name");
+    const availLabel = t("avail." + p.availability);
+    const badgeClass = p.availability === "available" ? "badge--available" : "badge--order";
+
+    card.innerHTML =
+      '<span class="card__media"><img src="' + escapeAttr(img) +
+        '" alt="' + escapeAttr(name) + '" loading="lazy"></span>' +
+      '<span class="card__body">' +
+        '<span class="card__name">' + escapeHtml(name) + "</span>" +
+        '<span class="card__foot">' +
+          formatPrice(p.price) +
+          '<span class="badge ' + badgeClass + '">' + escapeHtml(availLabel) + "</span>" +
+        "</span>" +
+      "</span>";
+
+    card.addEventListener("click", () => openProduct(p));
+    return card;
+  }
+
+  /* ---------- Modale prodotto ---------- */
+  let dialog;
+
+  function openProduct(p) {
+    if (!dialog) {
+      dialog = document.createElement("dialog");
+      dialog.className = "product";
+      document.body.appendChild(dialog);
+    }
+
+    const name = field(p, "name");
+    const images = (p.images && p.images.length) ? p.images : ["assets/img/placeholder.svg"];
+    const availLabel = t("avail." + p.availability);
+    const badgeClass = p.availability === "available" ? "badge--available" : "badge--order";
+
+    const thumbs = images.length > 1
+      ? '<div class="product__thumbs" role="group" aria-label="' + escapeAttr(t("product.gallery")) + '">' +
+          images.map((src, i) =>
+            '<button type="button" data-thumb="' + i + '"' +
+            (i === 0 ? ' aria-current="true"' : "") +
+            '><img src="' + escapeAttr(src) + '" alt=""></button>'
+          ).join("") +
+        "</div>"
+      : "";
+
+    const material = field(p, "material");
+    const time = field(p, "time");
+    const desc = field(p, "description") || field(p, "desc");
+
+    const metaRows =
+      (material ? '<dt>' + escapeHtml(t("product.material")) + '</dt><dd>' + escapeHtml(material) + "</dd>" : "") +
+      (time ? '<dt>' + escapeHtml(t("product.time")) + '</dt><dd>' + escapeHtml(time) + "</dd>" : "") +
+      (desc ? '<dt>' + escapeHtml(t("product.description")) + '</dt><dd>' + escapeHtml(desc) + "</dd>" : "");
+
+    const handmade = isHandmade(p)
+      ? '<p class="handmade-note"><span aria-hidden="true">✶</span><span>' +
+        escapeHtml(t("product.handmade")) + "</span></p>"
+      : "";
+
+    dialog.innerHTML =
+      '<button type="button" class="product__close" aria-label="' + escapeAttr(t("product.close")) + '">✕</button>' +
+      '<div class="product__grid">' +
+        '<div class="product__gallery">' +
+          '<img id="pgImg" src="' + escapeAttr(images[0]) + '" alt="' + escapeAttr(name) + '">' +
+          thumbs +
+        "</div>" +
+        '<div class="product__info">' +
+          '<span class="badge ' + badgeClass + '">' + escapeHtml(availLabel) + "</span>" +
+          "<h2 id=\"pgTitle\">" + escapeHtml(name) + "</h2>" +
+          '<dl class="product__meta">' + metaRows + "</dl>" +
+          handmade +
+          '<div class="product__price-row">' +
+            formatPrice(p.price) +
+            '<a class="btn" href="' + escapeAttr(mailtoFor(p)) + '">' +
+              escapeHtml(t("product.contact")) + "</a>" +
+          "</div>" +
+        "</div>" +
+      "</div>";
+
+    dialog.setAttribute("aria-label", name);
+
+    // Galleria: cambio immagine
+    dialog.querySelectorAll("[data-thumb]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = Number(btn.getAttribute("data-thumb"));
+        dialog.querySelector("#pgImg").src = images[idx];
+        dialog.querySelectorAll("[data-thumb]").forEach((b) => b.removeAttribute("aria-current"));
+        btn.setAttribute("aria-current", "true");
+      });
+    });
+
+    dialog.querySelector(".product__close").addEventListener("click", () => dialog.close());
+    // Chiusura cliccando sullo sfondo
+    dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
+
+    dialog.showModal();
+  }
+
+  /* ---------- Escape ---------- */
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+  function escapeAttr(s) { return escapeHtml(s); }
+})();

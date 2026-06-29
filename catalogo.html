@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catalogo — gaiacrochet</title>
+  <meta name="description" content="Catalogo dei prodotti gaiacrochet: uncinetto, cucito e altro. Filtra per categoria e disponibilità, poi scrivici.">
+  <link rel="preload" href="assets/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Vai al contenuto</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__bar">
+      <a class="logo" href="index.html" aria-label="gaiacrochet — home">
+        <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="14" fill="none" stroke="var(--garnet)" stroke-width="3" stroke-dasharray="5 4"/>
+          <line x1="11" y1="29" x2="29" y2="11" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="29" cy="11" r="2.6" fill="none" stroke="var(--teal)" stroke-width="2"/>
+        </svg>
+        <span class="logo__word">gaia<b>crochet</b></span>
+      </a>
+      <nav class="nav" aria-label="Principale">
+        <a href="catalogo.html" aria-current="page" data-i18n="nav.catalog">Catalogo</a>
+        <a href="chi-siamo.html" data-i18n="nav.about">Chi siamo</a>
+        <a href="spedizioni.html" data-i18n="nav.shipping">Spedizioni e pagamenti</a>
+        <button class="tool-btn lang-btn" type="button" data-lang-toggle aria-label="Cambia lingua"></button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap catalog-head">
+      <p class="eyebrow" data-i18n="meta.tagline">Fatto a mano</p>
+      <h1 data-i18n="catalog.title">Catalogo</h1>
+      <p class="lead" data-i18n="catalog.intro">Cerca, filtra e scrivici per il pezzo che ti piace.</p>
+    </div>
+
+    <hr class="stitch wrap" aria-hidden="true" style="max-width:var(--maxw)">
+
+    <div class="wrap">
+      <div class="filters" role="search">
+        <div class="field field--search">
+          <label for="f-search" data-i18n="catalog.search.label">Cerca</label>
+          <input id="f-search" type="search" autocomplete="off"
+                 placeholder="Cerca un prodotto…" data-i18n-attr="placeholder:catalog.search.placeholder">
+        </div>
+        <div class="field">
+          <label for="f-category" data-i18n="catalog.category.label">Categoria</label>
+          <select id="f-category">
+            <option value="" data-i18n="catalog.category.all">Tutte le categorie</option>
+            <option value="cucito" data-i18n="cat.cucito">Cucito</option>
+            <option value="uncinetto" data-i18n="cat.uncinetto">Uncinetto</option>
+            <option value="altro" data-i18n="cat.altro">Altro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-availability" data-i18n="catalog.availability.label">Disponibilità</label>
+          <select id="f-availability">
+            <option value="" data-i18n="catalog.availability.all">Tutte</option>
+            <option value="available" data-i18n="avail.available">Disponibile</option>
+            <option value="order" data-i18n="avail.order">Su ordinazione</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="result-count" id="result-count" aria-live="polite"></p>
+      <div class="grid" id="grid" aria-busy="false"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__bar">
+      <span data-i18n="footer.tagline">Pezzi unici, fatti a mano.</span>
+      <span class="social">
+        <a href="https://instagram.com/gaiacrochet1" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+          <span data-i18n="footer.instagram">Seguici su Instagram</span>
+        </a>
+      </span>
+      <span>© <span data-year>2026</span> gaiacrochet · <a href="privacy.html" data-i18n="nav.privacy">Privacy</a></span>
+    </div>
+  </footer>
+
+  <div class="a11y-panel">
+    <button class="a11y-toggle" type="button" aria-expanded="false" aria-controls="a11y-menu" aria-label="Opzioni di accessibilità" data-i18n-attr="aria-label:a11y.open">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="12" cy="4" r="2"/><path d="M4 8h16M12 8v8m0 0l-3 4m3-4l3 4"/>
+      </svg>
+    </button>
+    <div class="a11y-menu" id="a11y-menu" hidden>
+      <h2 data-i18n="a11y.title">Accessibilità</h2>
+      <div class="a11y-row">
+        <span data-i18n="a11y.font">Font ad alta leggibilità</span>
+        <label class="switch"><input type="checkbox" data-pref="a11y-font"><span class="track"></span></label>
+      </div>
+      <div class="a11y-row">
+        <span data-i18n="a11y.large">Testo e immagini grandi</span>
+        <label class="switch"><input type="checkbox" data-pref="a11y-large"><span class="track"></span></label>
+      </div>
+      <div class="a11y-row">
+        <span data-i18n="a11y.motion">Riduci le animazioni</span>
+        <label class="switch"><input type="checkbox" data-pref="a11y-motion"><span class="track"></span></label>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/catalog.js"></script>
+</body>
+</html>
