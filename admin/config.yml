@@ -13,9 +13,6 @@ backend:
 media_folder: assets/img
 public_folder: assets/img
 
-# Lingua dell'interfaccia del pannello
-locale: it
-
 collections:
   - name: catalogo
     label: Catalogo
