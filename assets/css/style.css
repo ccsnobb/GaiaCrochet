@@ -36,8 +36,9 @@
   --paper-2:    #FBF6EC;
   --ink:        #2B2019;
   --ink-soft:   #6B5D52;
-  --garnet:     #9E2540;
-  --garnet-deep:#7A1B30;
+  --garnet:     #D2691E;
+  --garnet-deep:#A0522D;
+  --garnet-darker:#7C3E1C;
   --teal:       #1E5B57;
   --mustard:    #C98A1E;
   --line:       rgba(43, 32, 25, 0.16);
@@ -189,11 +190,11 @@ h3 { font-size: 1.25rem; }
 
 .btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
-  background: var(--garnet); color: #fff; text-decoration: none;
+  background: var(--garnet-deep); color: #fff; text-decoration: none;
   font-weight: 600; padding: 0.85rem 1.6rem; border-radius: 999px;
   border: 0; transition: transform var(--t), background var(--t);
 }
-.btn:hover { background: var(--garnet-deep); transform: translateY(-1px); }
+.btn:hover { background: var(--garnet-darker); transform: translateY(-1px); }
 .btn--ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
 .btn--ghost:hover { background: var(--ink); color: var(--paper); }
 
