@@ -15,4 +15,5 @@
 # --- Pannello CMS: serve caricare Sveltia da CDN e parlare con GitHub ---
 /admin/*
   X-Robots-Tag: noindex
+  ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; script-src 'self' https://unpkg.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://*.workers.dev; font-src 'self' data:; frame-ancestors 'none'
