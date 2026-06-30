@@ -1,10 +1,10 @@
 {
   "products": [
     {
-      "id": "amigurumi-volpe",
+      "id": "Top bicolore",
       "category": "uncinetto",
       "handmade": true,
-      "price": 28.0,
+      "price": 28,
       "availability": "available",
       "images": [
         "assets/img/sample-uncinetto-1.svg",
@@ -42,7 +42,7 @@
       "id": "pochette-lino",
       "category": "cucito",
       "handmade": true,
-      "price": 22.0,
+      "price": 22,
       "availability": "available",
       "images": [
         "assets/img/sample-cucito-1.svg",
@@ -61,7 +61,7 @@
       "id": "borsa-tote",
       "category": "cucito",
       "handmade": true,
-      "price": 34.0,
+      "price": 34,
       "availability": "order",
       "images": [
         "assets/img/sample-cucito-2.svg",
@@ -81,7 +81,7 @@
       "category": "altro",
       "subcategory": "dadi-resina",
       "handmade": true,
-      "price": 30.0,
+      "price": 30,
       "availability": "order",
       "images": [
         "assets/img/sample-dadi-1.svg",
@@ -101,7 +101,7 @@
       "category": "altro",
       "subcategory": "videogiochi",
       "handmade": false,
-      "price": 45.0,
+      "price": 45,
       "availability": "available",
       "images": [
         "assets/img/sample-game-1.svg"
