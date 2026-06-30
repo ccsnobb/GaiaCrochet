@@ -5,9 +5,9 @@
 
 backend:
   name: github
-  repo: TUO-UTENTE-GITHUB/gaiacrochet   # <-- DA COMPILARE: utente/nome-repo
+  repo: ccsnobb/GaiaCrochet
   branch: main
-  base_url: https://TUO-WORKER.workers.dev   # <-- DA COMPILARE: URL del Worker OAuth
+  base_url: https://sveltia-cms-auth.m-bandinu.workers.dev
 
 # Cartella dove il CMS carica le immagini caricate dall'utente
 media_folder: assets/img
