@@ -57,6 +57,7 @@ const I18N = {
     "a11y.font": "Font ad alta leggibilità",
     "a11y.large": "Testo e immagini grandi",
     "a11y.motion": "Riduci le animazioni",
+    "a11y.theme": "Tema turchese",
 
     "footer.tagline": "Pezzi unici, fatti a mano.",
     "footer.instagram": "Seguici su Instagram",
@@ -148,6 +149,7 @@ const I18N = {
     "a11y.font": "High-readability font",
     "a11y.large": "Large text and images",
     "a11y.motion": "Reduce animations",
+    "a11y.theme": "Teal theme",
 
     "footer.tagline": "Unique, handmade pieces.",
     "footer.instagram": "Follow us on Instagram",

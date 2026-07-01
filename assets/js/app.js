@@ -10,8 +10,20 @@
   const A11Y = [
     { key: "gc_a11y_dys", cls: "a11y-dys", toggle: "a11y-font" },
     { key: "gc_a11y_large", cls: "a11y-large", toggle: "a11y-large" },
-    { key: "gc_a11y_reduce", cls: "a11y-reduce", toggle: "a11y-motion" }
+    { key: "gc_a11y_reduce", cls: "a11y-reduce", toggle: "a11y-motion" },
+    { key: "gc_theme_teal", cls: "theme-teal", toggle: "theme-teal" }
   ];
+
+  // Sorgenti del marchio logo per i due temi (percorso relativo, uguale su tutte le pagine).
+  const LOGO_SRC = {
+    base: "assets/img/logo-gatti-cuore.png",
+    teal: "assets/img/logo-gatti-cuore-teal.png"
+  };
+  function applyLogoTheme(teal) {
+    document.querySelectorAll(".logo__mark").forEach((img) => {
+      img.src = teal ? LOGO_SRC.teal : LOGO_SRC.base;
+    });
+  }
 
   function readPref(key) {
     try { return localStorage.getItem(key) === "1"; } catch (e) { return false; }
@@ -24,6 +36,7 @@
   A11Y.forEach((p) => {
     if (readPref(p.key)) document.documentElement.classList.add(p.cls);
   });
+  applyLogoTheme(readPref("gc_theme_teal"));
 
   /* ---------- Avvio dopo il caricamento del DOM ---------- */
   document.addEventListener("DOMContentLoaded", function () {
@@ -93,6 +106,7 @@
       input.addEventListener("change", function () {
         document.documentElement.classList.toggle(p.cls, input.checked);
         writePref(p.key, input.checked);
+        if (p.toggle === "theme-teal") applyLogoTheme(input.checked);
       });
     });
   }

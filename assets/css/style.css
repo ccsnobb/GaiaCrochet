@@ -61,6 +61,18 @@ html.a11y-reduce *,
 html.a11y-reduce *::before,
 html.a11y-reduce *::after { transition: none !important; animation: none !important; }
 
+/* Tema teal opzionale: rimappa la tripletta accento (--garnet*) sui blu-petrolio
+   del cuore. Un solo override propaga a logo, link, CTA, hover, focus, cucitura,
+   badge di selezione. I valori sono scelti per restare AA:
+   --garnet (accento, usi grandi/UI) #0086B3 = 3.9:1 su carta (>=3:1 ok);
+   --garnet-deep (link/CTA/testo)    #006C8E = 5.6:1 su carta, 5.9:1 testo bianco;
+   --garnet-darker (hover)           #00566F = 7.8:1. */
+html.theme-teal {
+  --garnet:        #0086B3;
+  --garnet-deep:   #006C8E;
+  --garnet-darker: #00566F;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
