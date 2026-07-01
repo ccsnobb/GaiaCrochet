@@ -8,6 +8,9 @@
   "use strict";
 
   const CONTACT_EMAIL = "info@gaiacrochet.com";
+  const GAME_CLICKS_NEEDED = 5;   // clic sul prezzo per sbloccare
+  let gameClicks = 0;
+  let gameWon = false;            // stato di sessione, nessun localStorage
 
   const grid = document.getElementById("grid");
   const countEl = document.getElementById("result-count");
@@ -69,6 +72,33 @@
       "?subject=" + encodeURIComponent(subject) +
       "&body=" + encodeURIComponent(body)
     );
+  }
+
+  // Come mailtoFor ma con il P.S. del codice sconto in fondo al corpo.
+  function mailtoForGame(p) {
+    const name = field(p, "name");
+    const subject = t("mail.subject", { name });
+    const body = t("mail.body", { name }) + "\n\n" + t("game.ps");
+    return (
+      "mailto:" + CONTACT_EMAIL +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body)
+    );
+  }
+
+  // Mostra il premio dentro la scheda, sotto la riga prezzo. role="status"
+  // lo fa annunciare agli screen reader nel momento in cui compare.
+  function revealPrize(dlg, p) {
+    const row = dlg.querySelector(".product__price-row");
+    if (!row || dlg.querySelector(".price-prize")) return; // niente duplicati
+    const prize = document.createElement("div");
+    prize.className = "price-prize";
+    prize.setAttribute("role", "status");
+    prize.innerHTML =
+      '<p class="price-prize__msg">' + escapeHtml(t("game.win")) + "</p>" +
+      '<a class="price-prize__cta" href="' + escapeAttr(mailtoForGame(p)) + '">' +
+        escapeHtml(t("game.cta")) + "</a>";
+    row.insertAdjacentElement("afterend", prize);
   }
 
   function matchesFilters(p) {
@@ -133,6 +163,7 @@
   let dialog;
 
   function openProduct(p) {
+    gameClicks = 0; // ogni apertura riparte da zero
     if (!dialog) {
       dialog = document.createElement("dialog");
       dialog.className = "product";
@@ -181,7 +212,7 @@
           '<dl class="product__meta">' + metaRows + "</dl>" +
           handmade +
           '<div class="product__price-row">' +
-            formatPrice(p.price) +
+            '<button type="button" class="price-game" data-price-game>' + formatPrice(p.price) + "</button>" +
             '<a class="btn" href="' + escapeAttr(mailtoFor(p)) + '">' +
               escapeHtml(t("product.contact")) + "</a>" +
           "</div>" +
@@ -203,6 +234,26 @@
     dialog.querySelector(".product__close").addEventListener("click", () => dialog.close());
     // Chiusura cliccando sullo sfondo
     dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
+
+    // Gioco "clicca il prezzo" (easter egg). Se gia' vinto in questa sessione,
+    // mostra subito il premio; altrimenti conta i clic fino allo sblocco.
+    const priceGame = dialog.querySelector("[data-price-game]");
+    if (priceGame) {
+      if (gameWon) {
+        revealPrize(dialog, p);
+      } else {
+        priceGame.addEventListener("click", () => {
+          gameClicks++;
+          priceGame.classList.remove("price-game--bounce");
+          void priceGame.offsetWidth; // forza il riavvio dell'animazione
+          priceGame.classList.add("price-game--bounce");
+          if (gameClicks >= GAME_CLICKS_NEEDED) {
+            gameWon = true;
+            revealPrize(dialog, p);
+          }
+        });
+      }
+    }
 
     dialog.showModal();
   }

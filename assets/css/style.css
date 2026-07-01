@@ -377,3 +377,35 @@ dialog.product::backdrop { background: rgba(43, 32, 25, 0.45); backdrop-filter: 
   .nav a { padding: 0.4rem 0.5rem; font-size: 0.95rem; }
   .hero { min-height: 60vh; }
 }
+
+/* ---------- Gioco prezzo (easter egg) ---------- */
+/* Il prezzo nella scheda e' un vero <button> ma senza aspetto da bottone:
+   resta identico al prezzo. Focalizzabile da tastiera (riceve il focus ring
+   globale in teal), quindi accessibile senza essere in evidenza. */
+.price-game {
+  font: inherit; background: none; border: 0; padding: 0; margin: 0;
+  color: inherit; cursor: pointer; display: inline-flex; align-items: baseline;
+}
+.price-game--bounce { animation: price-bounce 220ms ease; }
+@keyframes price-bounce {
+  0%, 100% { transform: scale(1); }
+  40%      { transform: scale(1.14); }
+}
+/* Il rimbalzo e' gia' coperto da html.a11y-reduce e da
+   @media (prefers-reduced-motion): entrambi azzerano animation. */
+
+/* Premio: discreto, tono carta, non un banner in contrasto. Compare solo
+   dopo lo sblocco, sotto la riga prezzo. */
+.price-prize {
+  margin-top: 0.8rem; padding-top: 0.8rem;
+  border-top: 1px dashed var(--line);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.9rem;
+}
+.price-prize__msg { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+.price-prize__cta {
+  font-size: 0.9rem; font-weight: 600; color: var(--garnet-deep);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+
+/* Frase teaser piccola sotto il testo di Chi siamo */
+.fineprint { font-size: 0.8rem; color: var(--ink-soft); opacity: 0.85; margin-top: 1.5rem; }

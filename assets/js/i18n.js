@@ -71,7 +71,12 @@ const I18N = {
     "about.title": "Chi siamo",
     "about.p1": "Siamo solo noi due, e lo facciamo per passione: per avere un posto tutto nostro, una vetrina dove mostrarvi le cose che ci piace creare.",
     "about.p2": "gaiacrochet è proprio questo: uncinetto, ago e qualche pezzo in resina — amigurumi, accessori, piccoli oggetti per la casa. Pochi pezzi per volta, fatti con calma, ognuno diverso dall'altro. Niente produzione in serie.",
-    "about.p3": "Il sito è una vetrina: qui vedi i prodotti, poi ci scrivi via email o su Instagram e ci accordiamo. Semplice così — e un po' della nostra passione arriva anche da te.",
+    "about.p3": "Il sito è la vetrina, se c'è qualcosa che ti piace scrivici via email o su Instagram e ci accordiamo. Tutto solo per farti arrivare un po' della nostra passione.",
+    "about.hint": "Se una creazione ti piace ma il prezzo ti frena, prova a cliccarci sopra. Magari più di una volta.",
+
+    "game.win": "Grazie per aver giocato! Sconto del 10% sbloccato.",
+    "game.cta": "Scrivici col codice",
+    "game.ps": "P.S. Ho giocato e ho sbloccato lo sconto: PERFAVOREEE10%",
 
     "shipping.title": "Spedizioni e pagamenti",
     "shipping.h_ship": "Spedizioni",
@@ -163,7 +168,12 @@ const I18N = {
     "about.title": "About us",
     "about.p1": "It's just the two of us, and we do this out of passion: to have a place of our own, a showcase where we can show you the things we love making.",
     "about.p2": "That's exactly what gaiacrochet is: crochet, needlework and a few resin pieces — amigurumi, accessories, small things for the home. A few pieces at a time, made calmly, each one different. No mass production.",
-    "about.p3": "The site is a showcase: here you see the products, then you write to us by email or on Instagram and we sort it out. Simple as that — and a little of our passion reaches you too.",
+    "about.p3": "This site is our shop window. If you see something you like, write to us by email or on Instagram and we'll work it out. All just to bring a little of our passion your way.",
+    "about.hint": "If you love one of our pieces but the price holds you back, try clicking on it. Maybe more than once.",
+
+    "game.win": "Thanks for playing! 10% discount unlocked.",
+    "game.cta": "Write to us with the code",
+    "game.ps": "P.S. I played the game and unlocked the discount: PERFAVOREEE10%",
 
     "shipping.title": "Shipping & payment",
     "shipping.h_ship": "Shipping",
