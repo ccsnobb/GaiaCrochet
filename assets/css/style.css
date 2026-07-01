@@ -53,9 +53,14 @@
 }
 
 /* Modalità accessibilità (classi su <html>) */
-html.a11y-dys body { font-family: "OpenDyslexic", sans-serif; }
+/* Font dyslessia universale: applicato a ogni elemento discendente, non a un elenco
+   di selettori. Copre così anche card prodotto, prezzi, badge, filtri, pannello a11y
+   e qualsiasi testo aggiunto in futuro, senza bisogno di aggiornare questa lista.
+   !important necessario: deve vincere su qualunque font-family più specifico
+   (es. .card__name, .price, .eyebrow) impostato altrove nel foglio di stile. */
+html.a11y-dys * { font-family: "OpenDyslexic", sans-serif !important; }
 html.a11y-dys h1, html.a11y-dys h2, html.a11y-dys h3,
-html.a11y-dys .logo__word { font-family: "OpenDyslexic", sans-serif; letter-spacing: 0; }
+html.a11y-dys .logo__word { letter-spacing: 0; }
 html.a11y-large { --scale: 1.28; }
 html.a11y-reduce *,
 html.a11y-reduce *::before,
