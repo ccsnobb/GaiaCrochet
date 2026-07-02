@@ -396,6 +396,45 @@ dialog.product::backdrop { background: rgba(43, 32, 25, 0.45); backdrop-filter: 
   .hero { min-height: 60vh; }
 }
 
+/* ---------- Aree tattili minime ---------- */
+/* 44px = 2.75rem, così scalano con "testo grande". Già conformi e quindi
+   non toccati: bottoni della modale (.btn, ~56px), thumbnail foto
+   (3.375rem = 54px), toggle del pannello a11y (52px). */
+.field input, .field select { min-height: 2.75rem; }
+.tool-btn { min-height: 2.75rem; }
+.product__close { width: 2.75rem; height: 2.75rem; }
+/* Lo switch resta 46x26 alla vista: si alza solo l'area cliccabile
+   dell'input invisibile, centrata sulla traccia. */
+.switch input { height: 2.75rem; top: 50%; transform: translateY(-50%); }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+  /* Barra filtri sticky compatta: ricerca a tutta riga, categoria e
+     disponibilità affiancate, meno padding per non mangiare schermo */
+  .filters { gap: 0.5rem 0.6rem; padding: 0.6rem 0 0.8rem; }
+  .field { flex: 1 1 calc(50% - 0.3rem); }
+  .field--search { flex: 1 1 100%; }
+  .field input, .field select { min-width: 0; }
+
+  /* Modale prodotto quasi a tutto schermo, con scroll interno alla
+     griglia: la X (assoluta rispetto al dialog) resta sempre in alto
+     a destra, raggiungibile col pollice. [open] per non scavalcare il
+     display:none del dialog chiuso. */
+  dialog.product[open] {
+    display: flex; flex-direction: column;
+    width: calc(100vw - 1rem);
+    height: calc(100vh - 1rem);
+    height: calc(100dvh - 1rem);
+    max-height: none;
+  }
+  .product__grid { flex: 1; min-height: 0; overflow-y: auto; }
+}
+
+@media (max-width: 480px) {
+  /* Una sola colonna: niente scroll orizzontale nemmeno con scala grande */
+  .grid { grid-template-columns: 1fr; }
+}
+
 /* ---------- Gioco prezzo (easter egg) ---------- */
 /* Il prezzo nella scheda e' un vero <button> ma senza aspetto da bottone:
    resta identico al prezzo. Focalizzabile da tastiera (riceve il focus ring
