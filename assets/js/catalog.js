@@ -21,6 +21,28 @@
 
   let PRODUCTS = [];
 
+  /* ---------- Altezza header -> --header-h ---------- */
+  // La barra filtri è sticky sotto l'header (anch'esso sticky, altezza non
+  // fissa: cambia con "testo grande" e col wrap della nav). Si misura
+  // l'altezza reale e la si scrive in --header-h su :root.
+  const header = document.querySelector(".site-header");
+  function updateHeaderVar() {
+    if (!header) return;
+    document.documentElement.style.setProperty("--header-h", header.offsetHeight + "px");
+  }
+  updateHeaderVar();
+  if (header && "ResizeObserver" in window) {
+    // Copre resize, cambio scala a11y-large e wrap della nav
+    new ResizeObserver(updateHeaderVar).observe(header);
+  } else if (header) {
+    // Fallback: solo resize finestra, con debounce
+    let headerVarTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(headerVarTimer);
+      headerVarTimer = setTimeout(updateHeaderVar, 150);
+    });
+  }
+
   /* ---------- Caricamento dati ---------- */
   fetch("data/products.json", { cache: "no-cache" })
     .then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })

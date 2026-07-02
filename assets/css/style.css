@@ -228,6 +228,17 @@ h3 { font-size: 1.25rem; }
   display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: flex-end;
   padding: 1rem 0 1.6rem;
 }
+/* Barra filtri sticky sotto l'header. --header-h è scritta da catalog.js
+   (misura reale dell'header, aggiornata da un ResizeObserver: copre anche
+   il cambio altezza con "testo grande"); il fallback serve solo prima che
+   il JS giri. Sfondo pieno e z-index sotto l'header (40) ma sopra le card,
+   così la griglia non traspare scorrendo. */
+.filters {
+  position: sticky;
+  top: var(--header-h, 3.5rem);
+  z-index: 30;
+  background: var(--paper);
+}
 .field { display: flex; flex-direction: column; gap: 0.3rem; }
 .field label { font-size: 0.8rem; font-weight: 600; color: var(--ink-soft); }
 .field input, .field select {
