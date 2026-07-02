@@ -213,8 +213,12 @@
           handmade +
           '<div class="product__price-row">' +
             '<button type="button" class="price-game" data-price-game>' + formatPrice(p.price) + "</button>" +
-            '<a class="btn" href="' + escapeAttr(mailtoFor(p)) + '">' +
-              escapeHtml(t("product.contact")) + "</a>" +
+            '<div class="product__cta">' +
+              '<a class="btn" href="' + escapeAttr(mailtoFor(p)) + '">' +
+                escapeHtml(t("product.contact")) + "</a>" +
+              '<button type="button" class="btn btn--ghost" data-copy-email aria-live="polite">' +
+                escapeHtml(t("product.copy")) + "</button>" +
+            "</div>" +
           "</div>" +
         "</div>" +
       "</div>";
@@ -230,6 +234,20 @@
         btn.setAttribute("aria-current", "true");
       });
     });
+
+    // Copia email: feedback "Copiata!" per 2 secondi, poi torna al testo normale
+    const copyBtn = dialog.querySelector("[data-copy-email]");
+    if (copyBtn) {
+      let copyTimer;
+      copyBtn.addEventListener("click", () => {
+        copyText(CONTACT_EMAIL).then((ok) => {
+          if (!ok) return;
+          copyBtn.textContent = t("product.copied");
+          clearTimeout(copyTimer);
+          copyTimer = setTimeout(() => { copyBtn.textContent = t("product.copy"); }, 2000);
+        });
+      });
+    }
 
     dialog.querySelector(".product__close").addEventListener("click", () => dialog.close());
     // Chiusura cliccando sullo sfondo
@@ -256,6 +274,31 @@
     }
 
     dialog.showModal();
+  }
+
+  /* ---------- Copia negli appunti ---------- */
+  // Ritorna una Promise<boolean>. Il fallback con textarea serve ai browser
+  // senza navigator.clipboard (o in contesti non sicuri, es. http).
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).then(() => true, () => legacyCopy(text));
+    }
+    return Promise.resolve(legacyCopy(text));
+  }
+
+  function legacyCopy(text) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    // Dentro la modale: col dialog aperto il resto della pagina e' inerte
+    (dialog || document.body).appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    ta.remove();
+    return ok;
   }
 
   /* ---------- Escape ---------- */

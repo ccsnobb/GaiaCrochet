@@ -46,6 +46,8 @@ const I18N = {
     "product.description": "Descrizione",
     "product.handmade": "Pezzo fatto a mano: piccole variazioni rispetto alla foto sono del tutto normali.",
     "product.contact": "Scrivici per questo pezzo",
+    "product.copy": "Copia email",
+    "product.copied": "Copiata!",
     "product.close": "Chiudi",
     "product.gallery": "Galleria foto del prodotto",
 
@@ -143,6 +145,8 @@ const I18N = {
     "product.description": "Description",
     "product.handmade": "Handmade piece: small differences from the photo are completely normal.",
     "product.contact": "Write to us about this piece",
+    "product.copy": "Copy email",
+    "product.copied": "Copied!",
     "product.close": "Close",
     "product.gallery": "Product photo gallery",
 
