@@ -146,7 +146,7 @@
 
     card.innerHTML =
       '<span class="card__media"><img src="' + escapeAttr(img) +
-        '" alt="' + escapeAttr(name) + '" loading="lazy"></span>' +
+        '" alt="' + escapeAttr(name) + '" loading="lazy" decoding="async"></span>' +
       '<span class="card__body">' +
         '<span class="card__name">' + escapeHtml(name) + "</span>" +
         '<span class="card__foot">' +
@@ -180,7 +180,7 @@
           images.map((src, i) =>
             '<button type="button" data-thumb="' + i + '"' +
             (i === 0 ? ' aria-current="true"' : "") +
-            '><img src="' + escapeAttr(src) + '" alt=""></button>'
+            '><img src="' + escapeAttr(src) + '" alt="" loading="lazy" decoding="async"></button>'
           ).join("") +
         "</div>"
       : "";
