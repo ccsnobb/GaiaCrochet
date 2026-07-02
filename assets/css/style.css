@@ -269,9 +269,14 @@ h3 { font-size: 1.25rem; }
   background: var(--paper-2); border-radius: var(--radius);
   border: 1px solid var(--line); overflow: hidden;
   text-align: left; padding: 0; display: flex; flex-direction: column;
-  transition: transform var(--t), box-shadow var(--t), outline-color var(--t);
+  transition: transform var(--t), box-shadow var(--t), outline-color var(--t), opacity var(--t);
   outline: 2px dashed transparent; outline-offset: 5px;
 }
+/* Entrata morbida al render dei filtri: catalog.js applica la classe alle
+   card nuove e la toglie al frame successivo; la transizione della card fa
+   il resto. Con a11y-reduce o prefers-reduced-motion il JS non applica la
+   classe (e le regole globali azzerano comunque le transizioni): card immediate. */
+.card--enter { opacity: 0; transform: translateY(8px); }
 .card:hover, .card:focus-visible {
   transform: translateY(-3px);
   box-shadow: 0 12px 30px -16px rgba(43,32,25,0.45);

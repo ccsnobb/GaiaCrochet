@@ -152,7 +152,23 @@
     }
 
     grid.innerHTML = "";
-    list.forEach((p) => grid.appendChild(buildCard(p)));
+    // Entrata morbida: niente classe (card immediate) se l'utente ha chiesto
+    // meno animazioni, dal pannello a11y o dal sistema operativo.
+    const noMotion =
+      document.documentElement.classList.contains("a11y-reduce") ||
+      (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    list.forEach((p) => {
+      const card = buildCard(p);
+      if (!noMotion) card.classList.add("card--enter");
+      grid.appendChild(card);
+    });
+    if (!noMotion) {
+      // Doppio rAF: il primo frame dipinge lo stato iniziale, al successivo
+      // togliere la classe fa partire la transizione.
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        grid.querySelectorAll(".card--enter").forEach((c) => c.classList.remove("card--enter"));
+      }));
+    }
   }
 
   function buildCard(p) {
